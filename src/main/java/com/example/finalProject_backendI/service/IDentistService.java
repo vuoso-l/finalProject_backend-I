@@ -1,12 +1,11 @@
 package com.example.finalProject_backendI.service;
 
 import com.example.finalProject_backendI.DTO.DentistDTO;
-import com.example.finalProject_backendI.entity.Dentist;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface IDentistService {
-    public void createDentist(Dentist dentistDTO);
+    public void createDentist(DentistDTO dentistDTO);
 
     public DentistDTO readDentist(Integer id);
 
@@ -14,5 +13,5 @@ public interface IDentistService {
 
     public void deleteDentist(Integer id);
 
-    public Set<DentistDTO> getAll();
+    public Collection<DentistDTO> getAll();
 }
