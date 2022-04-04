@@ -1,4 +1,4 @@
-package com.example.finalProject_backendI.Entity;
+package com.example.finalProject_backendI.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
@@ -20,7 +20,7 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String lastName;
     private String firstName;
     private String email;

@@ -1,4 +1,4 @@
-package com.example.finalProject_backendI.Entity;
+package com.example.finalProject_backendI.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String street;
     private String locality;
     private int number;
