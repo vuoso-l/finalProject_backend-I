@@ -1,11 +1,11 @@
-package com.example.finalProject_backendI.dto;
+package com.example.finalProject_backendI.DTO;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class AddressDto {
+public class AddressDTO {
     private Integer id;
     private String street;
     private String locality;

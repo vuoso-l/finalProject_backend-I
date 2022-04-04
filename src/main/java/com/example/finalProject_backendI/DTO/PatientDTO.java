@@ -1,4 +1,4 @@
-package com.example.finalProject_backendI.dto;
+package com.example.finalProject_backendI.DTO;
 
 import com.example.finalProject_backendI.entity.Address;
 import com.example.finalProject_backendI.entity.DentistShift;
@@ -10,7 +10,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-public class PatientDto {
+public class PatientDTO {
     private Integer id;
     private String lastName;
     private String firstName;

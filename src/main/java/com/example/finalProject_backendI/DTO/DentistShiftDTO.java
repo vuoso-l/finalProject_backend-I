@@ -1,4 +1,4 @@
-package com.example.finalProject_backendI.dto;
+package com.example.finalProject_backendI.DTO;
 
 import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.entity.Patient;
@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class DentistShiftDto {
+public class DentistShiftDTO {
     private Integer id;
     private Date date;
     private Patient patient;
