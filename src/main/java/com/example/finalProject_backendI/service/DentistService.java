@@ -24,7 +24,7 @@ public class DentistService implements IDentistService{
     }
 
     @Override
-    public DentistDTO readDentist(Integer id) {
+    public DentistDTO findOneDentist(Integer id) {
         DentistDTO dentistDTO = null;
         Optional<Dentist> dentistOptional= iDentistRepository.findById(id);
         if (dentistOptional.isPresent()){
@@ -44,7 +44,7 @@ public class DentistService implements IDentistService{
     }
 
     @Override
-    public Collection<DentistDTO> getAll() {
+    public Collection<DentistDTO> findAllDentists() {
         List<Dentist> dentistList= iDentistRepository.findAll();
         Set<DentistDTO> dentistsDTO= new HashSet<>();
         for (Dentist dentist: dentistList){

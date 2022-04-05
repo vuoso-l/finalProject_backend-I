@@ -7,11 +7,11 @@ import java.util.Collection;
 public interface IDentistService {
     public void createDentist(DentistDTO dentistDTO);
 
-    public DentistDTO readDentist(Integer id);
+    public DentistDTO findOneDentist(Integer id);
 
     public void updateDentist(DentistDTO dentistDTO);
 
     public void deleteDentist(Integer id);
 
-    public Collection<DentistDTO> getAll();
+    public Collection<DentistDTO> findAllDentists();
 }
