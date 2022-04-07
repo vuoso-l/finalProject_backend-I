@@ -5,7 +5,7 @@ import com.example.finalProject_backendI.entity.DentistShift;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.Set;
 
 @Getter
@@ -16,7 +16,7 @@ public class PatientDTO {
     private String firstName;
     private String email;
     private String dni;
-    private Date admissionDate;
+    private LocalDate admissionDate;
     private Address address;
     private Set<DentistShift> dentistShifts;
 }

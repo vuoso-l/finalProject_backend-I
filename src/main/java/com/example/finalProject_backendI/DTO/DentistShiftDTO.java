@@ -5,13 +5,13 @@ import com.example.finalProject_backendI.entity.Patient;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Getter
 @Setter
 public class DentistShiftDTO {
     private Integer id;
-    private Date date;
+    private LocalDate date;
     private Patient patient;
     private Dentist dentist;
 }
