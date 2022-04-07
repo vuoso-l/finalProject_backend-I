@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Set;
-import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +21,7 @@ public class Patient {
     private String firstName;
     private String email;
     private String dni;
-    private Date admissionDate;
+    private LocalDate admissionDate;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_address", referencedColumnName = "id")
