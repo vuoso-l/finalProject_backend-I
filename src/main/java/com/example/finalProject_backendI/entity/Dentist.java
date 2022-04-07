@@ -1,6 +1,7 @@
 package com.example.finalProject_backendI.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@JsonIgnoreProperties(value={"hibernateLazyInitializer","handler","fieldHandler"})
 @Data
 @Entity
 @Table(name = "dentists")
