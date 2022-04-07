@@ -50,7 +50,7 @@ public class AddressService implements IAddressService{
         List<Address> addressList= iAddressRepository.findAll();
         Set<AddressDTO> addressesDTO= new HashSet<>();
         for (Address address: addressList){
-            addressesDTO.add(mapper.convertValue(addressList, AddressDTO.class));
+            addressesDTO.add(mapper.convertValue(address, AddressDTO.class));
         }
         return addressesDTO;
     }

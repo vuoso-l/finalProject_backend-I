@@ -1,6 +1,7 @@
 package com.example.finalProject_backendI.service;
 
 import com.example.finalProject_backendI.DTO.PatientDTO;
+import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.Set;
@@ -16,5 +17,5 @@ public interface IPatientService {
 
     public Collection<PatientDTO> findAllPatients();
 
-    Set<PatientDTO> findOnePatientByEmail(String email);
+    public PatientDTO findOnePatientByEmail(String email);
 }

@@ -1,15 +1,15 @@
 package com.example.finalProject_backendI.service;
 
-import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.DTO.PatientDTO;
-import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.entity.Patient;
 import com.example.finalProject_backendI.repository.IPatientRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+@Service
 public class PatientService implements IPatientService{
 
     @Autowired
@@ -54,17 +54,22 @@ public class PatientService implements IPatientService{
     }
 
     @Override
-    public Set<PatientDTO> findOnePatientByEmail(String email) {
-        Set<Patient> patientSet = iPatientRepository.findOnePatientByEmail(email);
-        Set<PatientDTO> patientDTOSet = new HashSet<PatientDTO>();
-        for(Patient patient: patientSet)
-            patientDTOSet.add(mapper.convertValue(patient,PatientDTO.class));
-
-        return patientDTOSet;
+    public PatientDTO findOnePatientByEmail(String email) {
+        PatientDTO patientDTO = null;
+        Optional<Patient> patientOptional= iPatientRepository.findOnePatientByEmail(email);
+        if (patientOptional.isPresent()){
+            patientDTO = mapper.convertValue(patientOptional, PatientDTO.class);
+        }
+        return patientDTO;
     }
 
     public void savePatientDTO (PatientDTO patientDTO){
         Patient patient = mapper.convertValue(patientDTO, Patient.class);
         iPatientRepository.save(patient);
+    }
+
+    public Patient mapDto (PatientDTO patientDTO){
+        Patient patient = mapper.convertValue(patientDTO, Patient.class);
+        return patient;
     }
 }
