@@ -19,12 +19,12 @@ public class DentistService implements IDentistService{
     ObjectMapper mapper;
 
     @Override
-    public void createDentist(DentistDTO dentistDTO) {
+    public void create(DentistDTO dentistDTO) {
         saveDentistDTO(dentistDTO);
     }
 
     @Override
-    public DentistDTO findOneDentist(Integer id) {
+    public DentistDTO findOne(Integer id) {
         DentistDTO dentistDTO = null;
         Optional<Dentist> dentistOptional= iDentistRepository.findById(id);
         if (dentistOptional.isPresent()){
@@ -34,17 +34,17 @@ public class DentistService implements IDentistService{
     }
 
     @Override
-    public void updateDentist(DentistDTO dentistDTO) {
+    public void update(DentistDTO dentistDTO) {
         saveDentistDTO(dentistDTO);
     }
 
     @Override
-    public void deleteDentist(Integer id) {
+    public void delete(Integer id) {
         iDentistRepository.deleteById(id);
     }
 
     @Override
-    public Collection<DentistDTO> findAllDentists() {
+    public Collection<DentistDTO> findAll() {
         List<Dentist> dentistList= iDentistRepository.findAll();
         Set<DentistDTO> dentistsDTO= new HashSet<>();
         for (Dentist dentist: dentistList){

@@ -19,12 +19,12 @@ public class PatientService implements IPatientService{
     ObjectMapper mapper;
 
     @Override
-    public void createPatient(PatientDTO patientDTO) {
+    public void create(PatientDTO patientDTO) {
         savePatientDTO(patientDTO);
     }
 
     @Override
-    public PatientDTO findOnePatient(Integer id) {
+    public PatientDTO findOne(Integer id) {
         PatientDTO patientDTO = null;
         Optional<Patient> patientOptional= iPatientRepository.findById(id);
         if (patientOptional.isPresent()){
@@ -34,17 +34,17 @@ public class PatientService implements IPatientService{
     }
 
     @Override
-    public void updatePatient(PatientDTO patientDTO) {
+    public void update(PatientDTO patientDTO) {
         savePatientDTO(patientDTO);
     }
 
     @Override
-    public void deletePatient(Integer id) {
+    public void delete(Integer id) {
         iPatientRepository.deleteById(id);
     }
 
     @Override
-    public Collection<PatientDTO> findAllPatients() {
+    public Collection<PatientDTO> findAll() {
         List<Patient> patientList= iPatientRepository.findAll();
         Set<PatientDTO> patientDTOS= new HashSet<>();
         for (Patient patient: patientList){

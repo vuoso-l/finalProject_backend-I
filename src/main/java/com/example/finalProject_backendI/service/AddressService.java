@@ -1,9 +1,7 @@
 package com.example.finalProject_backendI.service;
 
 import com.example.finalProject_backendI.DTO.AddressDTO;
-import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.entity.Address;
-import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.repository.IAddressRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +19,12 @@ public class AddressService implements IAddressService{
     ObjectMapper mapper;
 
     @Override
-    public void createAddress(AddressDTO addressDTO) {
+    public void create(AddressDTO addressDTO) {
         saveAddressDTO(addressDTO);
     }
 
     @Override
-    public AddressDTO findOneAddress(Integer id) {
+    public AddressDTO findOne(Integer id) {
         AddressDTO addressDTO = null;
         Optional<Address> addressOptional= iAddressRepository.findById(id);
         if (addressOptional.isPresent()){
@@ -36,17 +34,17 @@ public class AddressService implements IAddressService{
     }
 
     @Override
-    public void updateAddress(AddressDTO addressDTO) {
+    public void update(AddressDTO addressDTO) {
         saveAddressDTO(addressDTO);
     }
 
     @Override
-    public void deleteAddress(Integer id) {
+    public void delete(Integer id) {
         iAddressRepository.deleteById(id);
     }
 
     @Override
-    public Collection<AddressDTO> findAllAddresses() {
+    public Collection<AddressDTO> findAll() {
         List<Address> addressList= iAddressRepository.findAll();
         Set<AddressDTO> addressesDTO= new HashSet<>();
         for (Address address: addressList){

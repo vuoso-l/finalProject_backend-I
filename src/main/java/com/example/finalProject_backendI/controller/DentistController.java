@@ -18,27 +18,27 @@ public class DentistController {
 
     @PostMapping("/register")
     public ResponseEntity<?> addDentist(@RequestBody DentistDTO dentistDTO) {
-        iDentistService.createDentist(dentistDTO);
+        iDentistService.create(dentistDTO);
         return new ResponseEntity<>("Se creó el odontólogo: " + dentistDTO.getFirstName() + " " + dentistDTO.getLastName(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findDentist(@PathVariable Integer id) {
-        return ResponseEntity.ok(iDentistService.findOneDentist(id));
+        return ResponseEntity.ok(iDentistService.findOne(id));
     }
 
     @GetMapping()
     public Collection<DentistDTO> findAllDentists() {
-        return iDentistService.findAllDentists();
+        return iDentistService.findAll();
     }
 
     @PutMapping()
     public ResponseEntity<?> updateDentist(@RequestBody DentistDTO dentistDTO) {
         ResponseEntity<String> res = null;
-        if (iDentistService.findOneDentist(dentistDTO.getId()) == null){
+        if (iDentistService.findOne(dentistDTO.getId()) == null){
             res = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            iDentistService.updateDentist(dentistDTO);
+            iDentistService.update(dentistDTO);
             res = new ResponseEntity<>("Se modificó el odontólogo con id: " + dentistDTO.getId(), HttpStatus.OK);
         }
         return res;
@@ -47,10 +47,10 @@ public class DentistController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDentist(@PathVariable Integer id) {
         ResponseEntity<String> res = null;
-        if (iDentistService.findOneDentist(id) == null){
+        if (iDentistService.findOne(id) == null){
             res = new ResponseEntity<String>(HttpStatus.NOT_FOUND);
         } else {
-            iDentistService.deleteDentist(id);
+            iDentistService.delete(id);
             res = new ResponseEntity<>("Odontólogo eliminado con id: " + id, HttpStatus.OK);
         }
         return res;
