@@ -1,0 +1,1 @@
+[2022-04-11 15:14:11] [ ERROR] [GlobalExceptionHandler:18] Failed to convert value of type 'java.lang.String' to required type 'java.lang.Integer'; nested exception is java.lang.NumberFormatException: For input string: "2a"

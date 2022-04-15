@@ -19,7 +19,7 @@ public class DentistShiftController {
     @PostMapping("/register")
     public ResponseEntity<?> addDentistShift(@RequestBody DentistShiftDTO dentistShiftDTO) {
         iDentistShiftService.create(dentistShiftDTO);
-        return new ResponseEntity<>("Se creó el turno para el paciente: " + dentistShiftDTO.getPatient(), HttpStatus.OK);
+        return new ResponseEntity<>("Se creó el turno para el paciente con id : " + dentistShiftDTO.getPatient().getId(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
