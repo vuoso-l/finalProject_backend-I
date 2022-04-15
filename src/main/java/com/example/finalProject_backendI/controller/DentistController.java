@@ -16,22 +16,26 @@ public class DentistController {
     @Autowired
     IDentistService iDentistService;
 
+    @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addDentist(@RequestBody DentistDTO dentistDTO) {
         iDentistService.create(dentistDTO);
         return new ResponseEntity<>("Se creó el odontólogo: " + dentistDTO.getFirstName() + " " + dentistDTO.getLastName(), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/{id}")
     public ResponseEntity<?> findDentist(@PathVariable Integer id) {
         return ResponseEntity.ok(iDentistService.findOne(id));
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping()
     public Collection<DentistDTO> findAllDentists() {
         return iDentistService.findAll();
     }
 
+    @CrossOrigin(origins="*")
     @PutMapping()
     public ResponseEntity<?> updateDentist(@RequestBody DentistDTO dentistDTO) {
         ResponseEntity<String> res = null;
@@ -44,6 +48,7 @@ public class DentistController {
         return res;
     }
 
+    @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDentist(@PathVariable Integer id) {
         ResponseEntity<String> res = null;

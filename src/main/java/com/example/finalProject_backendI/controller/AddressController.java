@@ -16,22 +16,26 @@ public class AddressController {
     @Autowired
     private IAddressService iAddressService;
 
+    @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addAddress(@RequestBody AddressDTO addressDTO) {
         iAddressService.create(addressDTO);
         return new ResponseEntity<>("Se creó el domicilio: " + addressDTO.getStreet() + " " + addressDTO.getNumber(), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/{id}")
     public ResponseEntity<?> findAddress(@PathVariable Integer id) {
         return ResponseEntity.ok(iAddressService.findOne(id));
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping()
     public Collection<AddressDTO> findAllAddresses() {
         return iAddressService.findAll();
     }
 
+    @CrossOrigin(origins="*")
     @PutMapping()
     public ResponseEntity<?> updateAddress(@RequestBody AddressDTO addressDTO) {
         ResponseEntity<String> res = null;
@@ -44,6 +48,7 @@ public class AddressController {
         return res;
     }
 
+    @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAddress(@PathVariable Integer id) {
         ResponseEntity<String> res = null;

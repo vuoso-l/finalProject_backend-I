@@ -16,22 +16,26 @@ public class PatientController {
     @Autowired
     IPatientService iPatientService;
 
+    @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addPatient(@RequestBody PatientDTO patientDTO) {
         iPatientService.create(patientDTO);
         return new ResponseEntity<>("Se creó el paciente: " + patientDTO.getFirstName() + " " + patientDTO.getLastName(), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/id/{id}")
     public ResponseEntity<?> findPatient(@PathVariable Integer id) {
         return ResponseEntity.ok(iPatientService.findOne(id));
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping()
     public Collection<PatientDTO> findAllPatients() {
         return iPatientService.findAll();
     }
 
+    @CrossOrigin(origins="*")
     @PutMapping()
     public ResponseEntity<?> updatePatient(@RequestBody PatientDTO patientDTO) {
         ResponseEntity<String> res = null;
@@ -44,6 +48,7 @@ public class PatientController {
         return res;
     }
 
+    @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePatient(@PathVariable Integer id) {
         ResponseEntity<String> res = null;
@@ -56,6 +61,7 @@ public class PatientController {
         return res;
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/email/{email}")
     public ResponseEntity<?> findPatientByEmail(@PathVariable String email) {
         return ResponseEntity.ok(iPatientService.findOnePatientByEmail(email));

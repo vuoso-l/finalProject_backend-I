@@ -16,22 +16,26 @@ public class DentistShiftController {
     @Autowired
     IDentistShiftService iDentistShiftService;
 
+    @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addDentistShift(@RequestBody DentistShiftDTO dentistShiftDTO) {
         iDentistShiftService.create(dentistShiftDTO);
         return new ResponseEntity<>("Se creó el turno para el paciente con id : " + dentistShiftDTO.getPatient().getId(), HttpStatus.OK);
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/{id}")
     public ResponseEntity<?> findDentistShift(@PathVariable Integer id) {
         return ResponseEntity.ok(iDentistShiftService.findOne(id));
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping()
     public Collection<DentistShiftDTO> findAllDentistShifts() {
         return iDentistShiftService.findAll();
     }
 
+    @CrossOrigin(origins="*")
     @PutMapping()
     public ResponseEntity<?> updateDentistShift(@RequestBody DentistShiftDTO dentistShiftDTO) {
         ResponseEntity<String> res = null;
@@ -44,6 +48,7 @@ public class DentistShiftController {
         return res;
     }
 
+    @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDentistShift(@PathVariable Integer id) {
         ResponseEntity<String> res = null;
