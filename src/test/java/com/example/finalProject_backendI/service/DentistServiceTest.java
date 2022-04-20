@@ -19,48 +19,45 @@ class DentistServiceTest {
     IDentistService iDentistService;
 
     DentistDTO dent1 = new DentistDTO();
-    DentistDTO readDentist;
+    DentistDTO dentTest;
     Collection <DentistDTO> readAll;
 
     @BeforeEach
     void setUp() {
         dent1.setRegistrationNumber("123456");
-        dent1.setFirstName("Lucas");
+        dent1.setFirstName("Probando!!");
         dent1.setLastName("Prueba-1");
+        dentTest = iDentistService.create(dent1);
     }
 
     @Test
     void create() {
-        iDentistService.create(dent1);
-        //readDentist = iDentistService.findOne(dent1.getId());
-        readDentist = iDentistService.findOne(53);
-        assertNotNull(readDentist);
+        assertNotNull(iDentistService.findOne(dentTest.getId()));
+        assertEquals(dent1.getFirstName(), dentTest.getFirstName());
+        assertEquals(dent1.getLastName(), dentTest.getLastName());
     }
 
     @Test
     void update() {
-        iDentistService.create(dent1);
-        DentistDTO updateDentist = new DentistDTO();
-        updateDentist.setId(67);
-        updateDentist.setRegistrationNumber("159321");
-        updateDentist.setFirstName("update");
-        updateDentist.setLastName("Prueba-1");
-        iDentistService.update(updateDentist);
-        assertEquals(iDentistService.findOne(67).getFirstName(), "update");
+        dentTest.setId(dent1.getId());
+        dentTest.setRegistrationNumber("159321");
+        dentTest.setFirstName("ReUpdate");
+        dentTest.setLastName("Prueba-1");
+        DentistDTO readUpdate = iDentistService.update(dentTest);
+        assertEquals(iDentistService.findOne(readUpdate.getId()).getFirstName(), "ReUpdate");
     }
 
     @Test
     void delete() {
-        /*//iDentistService.delete(dent1.getId());
-        iDentistService.delete(46);
-        readDentist = iDentistService.findOne(46);
-        assertNull(readDentist);*/
+        assertNotNull(iDentistService.findOne(dentTest.getId()));
+        iDentistService.delete(dentTest.getId());
+        assertNull(iDentistService.findOne(dentTest.getId()));
     }
 
     @Test
     void findAll() {
-        /*readAll = iDentistService.findAll();
+        readAll = iDentistService.findAll();
         Set<DentistDTO> dentistsDTO = new HashSet<>(readAll);
-        assertFalse(dentistsDTO.isEmpty());*/
+        assertFalse(dentistsDTO.isEmpty());
     }
 }

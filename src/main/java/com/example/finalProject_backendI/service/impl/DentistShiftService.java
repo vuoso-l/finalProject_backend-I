@@ -1,8 +1,12 @@
-package com.example.finalProject_backendI.service;
+package com.example.finalProject_backendI.service.impl;
 
+import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.DTO.DentistShiftDTO;
+import com.example.finalProject_backendI.entity.Address;
+import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.entity.DentistShift;
 import com.example.finalProject_backendI.repository.IDentistShiftRepository;
+import com.example.finalProject_backendI.service.IDentistShiftService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +23,9 @@ public class DentistShiftService implements IDentistShiftService {
     ObjectMapper mapper;
 
     @Override
-    public void create(DentistShiftDTO dentistShiftDTO) {
-        saveDentistShiftDTO(dentistShiftDTO);
+    public DentistShiftDTO create(DentistShiftDTO dentistShiftDTO) {
+        DentistShift dentistShift = mapEntity(dentistShiftDTO);
+        return mapDTO(iDentistShiftRepository.save(dentistShift));
     }
 
     @Override
@@ -44,8 +49,9 @@ public class DentistShiftService implements IDentistShiftService {
     }
 
     @Override
-    public void update(DentistShiftDTO dentistShiftDTO) {
-        saveDentistShiftDTO(dentistShiftDTO);
+    public DentistShiftDTO update(DentistShiftDTO dentistShiftDTO) {
+        DentistShift dentistShift = mapEntity(dentistShiftDTO);
+        return mapDTO(iDentistShiftRepository.save(dentistShift));
     }
 
     @Override
@@ -53,8 +59,13 @@ public class DentistShiftService implements IDentistShiftService {
         iDentistShiftRepository.deleteById(id);
     }
 
-    public void saveDentistShiftDTO (DentistShiftDTO dentistShiftDTO){
+    private DentistShiftDTO mapDTO(DentistShift dentistShift){
+        DentistShiftDTO dentistShiftDTO = mapper.convertValue(dentistShift, DentistShiftDTO.class);
+        return dentistShiftDTO;
+    }
+
+    public DentistShift mapEntity(DentistShiftDTO dentistShiftDTO){
         DentistShift dentistShift = mapper.convertValue(dentistShiftDTO, DentistShift.class);
-        iDentistShiftRepository.save(dentistShift);
+        return dentistShift;
     }
 }

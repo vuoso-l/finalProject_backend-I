@@ -1,8 +1,12 @@
-package com.example.finalProject_backendI.service;
+package com.example.finalProject_backendI.service.impl;
 
+import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.DTO.PatientDTO;
+import com.example.finalProject_backendI.entity.Address;
+import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.entity.Patient;
 import com.example.finalProject_backendI.repository.IPatientRepository;
+import com.example.finalProject_backendI.service.IPatientService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +14,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class PatientService implements IPatientService{
+public class PatientService implements IPatientService {
 
     @Autowired
     private IPatientRepository iPatientRepository;
@@ -19,8 +23,9 @@ public class PatientService implements IPatientService{
     ObjectMapper mapper;
 
     @Override
-    public void create(PatientDTO patientDTO) {
-        savePatientDTO(patientDTO);
+    public PatientDTO create(PatientDTO patientDTO) {
+        Patient patient = mapEntity(patientDTO);
+        return mapDTO(iPatientRepository.save(patient));
     }
 
     @Override
@@ -34,8 +39,9 @@ public class PatientService implements IPatientService{
     }
 
     @Override
-    public void update(PatientDTO patientDTO) {
-        savePatientDTO(patientDTO);
+    public PatientDTO update(PatientDTO patientDTO) {
+        Patient patient = mapEntity(patientDTO);
+        return mapDTO(iPatientRepository.save(patient));
     }
 
     @Override
@@ -63,12 +69,12 @@ public class PatientService implements IPatientService{
         return patientDTO;
     }
 
-    public void savePatientDTO (PatientDTO patientDTO){
-        Patient patient = mapper.convertValue(patientDTO, Patient.class);
-        iPatientRepository.save(patient);
+    private PatientDTO mapDTO(Patient patient){
+        PatientDTO patientDTO = mapper.convertValue(patient, PatientDTO.class);
+        return patientDTO;
     }
 
-    public Patient mapDto (PatientDTO patientDTO){
+    public Patient mapEntity(PatientDTO patientDTO){
         Patient patient = mapper.convertValue(patientDTO, Patient.class);
         return patient;
     }
