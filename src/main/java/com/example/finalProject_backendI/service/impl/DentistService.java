@@ -1,8 +1,9 @@
-package com.example.finalProject_backendI.service;
+package com.example.finalProject_backendI.service.impl;
 
 import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.repository.IDentistRepository;
+import com.example.finalProject_backendI.service.IDentistService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class DentistService implements IDentistService{
+public class DentistService implements IDentistService {
 
     @Autowired
     private IDentistRepository iDentistRepository;
@@ -19,8 +20,9 @@ public class DentistService implements IDentistService{
     ObjectMapper mapper;
 
     @Override
-    public void create(DentistDTO dentistDTO) {
-        saveDentistDTO(dentistDTO);
+    public DentistDTO create(DentistDTO dentistDTO) {
+        Dentist dent = mapEntity(dentistDTO);
+        return mapDTO(iDentistRepository.save(dent));
     }
 
     @Override
@@ -34,8 +36,9 @@ public class DentistService implements IDentistService{
     }
 
     @Override
-    public void update(DentistDTO dentistDTO) {
-        saveDentistDTO(dentistDTO);
+    public DentistDTO update(DentistDTO dentistDTO) {
+        Dentist dent = mapEntity(dentistDTO);
+        return mapDTO(iDentistRepository.save(dent));
     }
 
     @Override
@@ -53,8 +56,13 @@ public class DentistService implements IDentistService{
         return dentistsDTO;
     }
 
-    public void saveDentistDTO (DentistDTO dentistDTO){
+    private DentistDTO mapDTO(Dentist dentist){
+        DentistDTO dentistDTO = mapper.convertValue(dentist, DentistDTO.class);
+        return dentistDTO;
+    }
+
+    public Dentist mapEntity(DentistDTO dentistDTO){
         Dentist dentist = mapper.convertValue(dentistDTO, Dentist.class);
-        iDentistRepository.save(dentist);
+        return dentist;
     }
 }

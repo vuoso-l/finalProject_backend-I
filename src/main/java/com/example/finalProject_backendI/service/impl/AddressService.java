@@ -1,8 +1,11 @@
-package com.example.finalProject_backendI.service;
+package com.example.finalProject_backendI.service.impl;
 
 import com.example.finalProject_backendI.DTO.AddressDTO;
+import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.entity.Address;
+import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.repository.IAddressRepository;
+import com.example.finalProject_backendI.service.IAddressService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +13,7 @@ import org.springframework.stereotype.Service;
 import java.util.*;
 
 @Service
-public class AddressService implements IAddressService{
+public class AddressService implements IAddressService {
 
     @Autowired
     private IAddressRepository iAddressRepository;
@@ -19,8 +22,9 @@ public class AddressService implements IAddressService{
     ObjectMapper mapper;
 
     @Override
-    public void create(AddressDTO addressDTO) {
-        saveAddressDTO(addressDTO);
+    public AddressDTO create(AddressDTO addressDTO) {
+        Address address = mapEntity(addressDTO);
+        return mapDTO(iAddressRepository.save(address));
     }
 
     @Override
@@ -34,8 +38,9 @@ public class AddressService implements IAddressService{
     }
 
     @Override
-    public void update(AddressDTO addressDTO) {
-        saveAddressDTO(addressDTO);
+    public AddressDTO update(AddressDTO addressDTO) {
+        Address address = mapEntity(addressDTO);
+        return mapDTO(iAddressRepository.save(address));
     }
 
     @Override
@@ -53,8 +58,13 @@ public class AddressService implements IAddressService{
         return addressesDTO;
     }
 
-    public void saveAddressDTO (AddressDTO addressDTO){
+    private AddressDTO mapDTO(Address address){
+        AddressDTO addressDTO = mapper.convertValue(address, AddressDTO.class);
+        return addressDTO;
+    }
+
+    public Address mapEntity(AddressDTO addressDTO){
         Address address = mapper.convertValue(addressDTO, Address.class);
-        iAddressRepository.save(address);
+        return address;
     }
 }
