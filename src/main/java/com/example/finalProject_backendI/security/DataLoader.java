@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class DataLoader implements ApplicationRunner {
 
-    @Autowired
     private final IUserRepository iUserRepository;
 
     @Autowired
@@ -25,6 +24,7 @@ public class DataLoader implements ApplicationRunner {
         String hashedPassword = passwordEncoder.encode("password");
         BCryptPasswordEncoder passwordEncoder2 = new BCryptPasswordEncoder();
         String hashedPassword2 = passwordEncoder2.encode("password2");
+        iUserRepository.deleteAll();
         iUserRepository.save(new User("Lucas", "Lucas", "lucas@gmail.com", hashedPassword, UserRoles.ADMIN));
         iUserRepository.save(new User("Paula", "paula", "paula@gmail.com", hashedPassword2, UserRoles.USER));
     }
