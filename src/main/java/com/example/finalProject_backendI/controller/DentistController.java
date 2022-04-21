@@ -19,8 +19,8 @@ public class DentistController {
     @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addDentist(@RequestBody DentistDTO dentistDTO) {
-        iDentistService.create(dentistDTO);
-        return new ResponseEntity<>("Se creó el odontólogo: " + dentistDTO.getFirstName() + " " + dentistDTO.getLastName(), HttpStatus.OK);
+        DentistDTO newDent = iDentistService.create(dentistDTO);
+        return new ResponseEntity<>(newDent, HttpStatus.OK);
     }
 
     @CrossOrigin(origins="*")
