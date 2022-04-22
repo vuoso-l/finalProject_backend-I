@@ -19,31 +19,32 @@ public class DentistController {
     @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addDentist(@RequestBody DentistDTO dentistDTO) {
-        DentistDTO newDent = iDentistService.create(dentistDTO);
-        return new ResponseEntity<>(newDent, HttpStatus.OK);
+        DentistDTO dentistCreated = iDentistService.create(dentistDTO);
+        return new ResponseEntity<>(dentistCreated, HttpStatus.OK);
     }
 
     @CrossOrigin(origins="*")
     @GetMapping("/{id}")
     public ResponseEntity<?> findDentist(@PathVariable Integer id) {
-        return ResponseEntity.ok(iDentistService.findOne(id));
+        DentistDTO dentistDTO = iDentistService.findOne(id);
+        return new ResponseEntity<>(dentistDTO, HttpStatus.OK);
     }
 
     @CrossOrigin(origins="*")
     @GetMapping()
-    public Collection<DentistDTO> findAllDentists() {
-        return iDentistService.findAll();
+    public ResponseEntity<Collection<DentistDTO>> findAllDentists() {
+        return ResponseEntity.ok(iDentistService.findAll());
     }
 
     @CrossOrigin(origins="*")
     @PutMapping()
     public ResponseEntity<?> updateDentist(@RequestBody DentistDTO dentistDTO) {
-        ResponseEntity<String> res = null;
+        ResponseEntity<?> res;
         if (iDentistService.findOne(dentistDTO.getId()) == null){
             res = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            iDentistService.update(dentistDTO);
-            res = new ResponseEntity<>("Se modificó el odontólogo con id: " + dentistDTO.getId(), HttpStatus.OK);
+            DentistDTO dentistUpdated = iDentistService.update(dentistDTO);
+            res = new ResponseEntity<>(dentistUpdated, HttpStatus.OK);
         }
         return res;
     }
@@ -51,9 +52,9 @@ public class DentistController {
     @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDentist(@PathVariable Integer id) {
-        ResponseEntity<String> res = null;
+        ResponseEntity<String> res;
         if (iDentistService.findOne(id) == null){
-            res = new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+            res = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             iDentistService.delete(id);
             res = new ResponseEntity<>("Odontólogo eliminado con id: " + id, HttpStatus.OK);
