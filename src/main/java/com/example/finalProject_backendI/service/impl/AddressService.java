@@ -1,9 +1,7 @@
 package com.example.finalProject_backendI.service.impl;
 
 import com.example.finalProject_backendI.DTO.AddressDTO;
-import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.entity.Address;
-import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.repository.IAddressRepository;
 import com.example.finalProject_backendI.service.IAddressService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +14,7 @@ import java.util.*;
 public class AddressService implements IAddressService {
 
     @Autowired
-    private IAddressRepository iAddressRepository;
+    IAddressRepository iAddressRepository;
 
     @Autowired
     ObjectMapper mapper;
@@ -59,12 +57,10 @@ public class AddressService implements IAddressService {
     }
 
     private AddressDTO mapDTO(Address address){
-        AddressDTO addressDTO = mapper.convertValue(address, AddressDTO.class);
-        return addressDTO;
+        return mapper.convertValue(address, AddressDTO.class);
     }
 
     public Address mapEntity(AddressDTO addressDTO){
-        Address address = mapper.convertValue(addressDTO, Address.class);
-        return address;
+        return mapper.convertValue(addressDTO, Address.class);
     }
 }

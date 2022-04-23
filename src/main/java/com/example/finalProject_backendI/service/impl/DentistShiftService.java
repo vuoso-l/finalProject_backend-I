@@ -1,9 +1,6 @@
 package com.example.finalProject_backendI.service.impl;
 
-import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.DTO.DentistShiftDTO;
-import com.example.finalProject_backendI.entity.Address;
-import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.entity.DentistShift;
 import com.example.finalProject_backendI.repository.IDentistShiftRepository;
 import com.example.finalProject_backendI.service.IDentistShiftService;
@@ -60,12 +57,10 @@ public class DentistShiftService implements IDentistShiftService {
     }
 
     private DentistShiftDTO mapDTO(DentistShift dentistShift){
-        DentistShiftDTO dentistShiftDTO = mapper.convertValue(dentistShift, DentistShiftDTO.class);
-        return dentistShiftDTO;
+        return mapper.convertValue(dentistShift, DentistShiftDTO.class);
     }
 
     public DentistShift mapEntity(DentistShiftDTO dentistShiftDTO){
-        DentistShift dentistShift = mapper.convertValue(dentistShiftDTO, DentistShift.class);
-        return dentistShift;
+        return mapper.convertValue(dentistShiftDTO, DentistShift.class);
     }
 }

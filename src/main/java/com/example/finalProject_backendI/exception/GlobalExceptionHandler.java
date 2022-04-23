@@ -1,4 +1,4 @@
-package com.example.finalProject_backendI;
+package com.example.finalProject_backendI.exception;
 
 import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
@@ -13,9 +13,8 @@ public class GlobalExceptionHandler {
     private static final Logger logger = Logger.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<?> allErrors(Exception ex, WebRequest req)
-    {
+    public ResponseEntity<?> allErrors(Exception ex, WebRequest req){
         logger.error(ex.getMessage());
-        return new ResponseEntity("ExceptionHandler Error " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>("ExceptionHandler Error " + ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

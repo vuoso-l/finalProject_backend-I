@@ -3,14 +3,14 @@ package com.example.finalProject_backendI.service;
 import java.util.Collection;
 
 public interface IBasicCrudService<T> {
-    public T create(T t);
+    T create(T t);
 
-    public T findOne(Integer id);
+    T findOne(Integer id);
 
-    public Collection<T> findAll();
+    Collection<T> findAll();
 
-    public T update(T t);
+    T update(T t);
 
-    public void delete(Integer id);
+    void delete(Integer id);
 
 }

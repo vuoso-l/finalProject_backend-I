@@ -1,9 +1,6 @@
 package com.example.finalProject_backendI.service.impl;
 
-import com.example.finalProject_backendI.DTO.DentistDTO;
 import com.example.finalProject_backendI.DTO.PatientDTO;
-import com.example.finalProject_backendI.entity.Address;
-import com.example.finalProject_backendI.entity.Dentist;
 import com.example.finalProject_backendI.entity.Patient;
 import com.example.finalProject_backendI.repository.IPatientRepository;
 import com.example.finalProject_backendI.service.IPatientService;
@@ -17,7 +14,7 @@ import java.util.*;
 public class PatientService implements IPatientService {
 
     @Autowired
-    private IPatientRepository iPatientRepository;
+    IPatientRepository iPatientRepository;
 
     @Autowired
     ObjectMapper mapper;
@@ -70,12 +67,10 @@ public class PatientService implements IPatientService {
     }
 
     private PatientDTO mapDTO(Patient patient){
-        PatientDTO patientDTO = mapper.convertValue(patient, PatientDTO.class);
-        return patientDTO;
+        return mapper.convertValue(patient, PatientDTO.class);
     }
 
     public Patient mapEntity(PatientDTO patientDTO){
-        Patient patient = mapper.convertValue(patientDTO, Patient.class);
-        return patient;
+        return mapper.convertValue(patientDTO, Patient.class);
     }
 }

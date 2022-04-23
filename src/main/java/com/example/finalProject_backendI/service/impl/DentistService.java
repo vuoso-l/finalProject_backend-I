@@ -14,7 +14,7 @@ import java.util.*;
 public class DentistService implements IDentistService {
 
     @Autowired
-    private IDentistRepository iDentistRepository;
+    IDentistRepository iDentistRepository;
 
     @Autowired
     ObjectMapper mapper;
@@ -57,12 +57,10 @@ public class DentistService implements IDentistService {
     }
 
     private DentistDTO mapDTO(Dentist dentist){
-        DentistDTO dentistDTO = mapper.convertValue(dentist, DentistDTO.class);
-        return dentistDTO;
+        return mapper.convertValue(dentist, DentistDTO.class);
     }
 
     public Dentist mapEntity(DentistDTO dentistDTO){
-        Dentist dentist = mapper.convertValue(dentistDTO, Dentist.class);
-        return dentist;
+        return mapper.convertValue(dentistDTO, Dentist.class);
     }
 }

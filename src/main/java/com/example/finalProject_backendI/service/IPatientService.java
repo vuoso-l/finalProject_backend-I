@@ -4,5 +4,5 @@ import com.example.finalProject_backendI.DTO.PatientDTO;
 
 public interface IPatientService extends IBasicCrudService<PatientDTO>{
 
-    public PatientDTO findOnePatientByEmail(String email);
+    PatientDTO findOnePatientByEmail(String email);
 }
