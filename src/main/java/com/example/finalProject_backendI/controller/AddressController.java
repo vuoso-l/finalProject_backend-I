@@ -14,36 +14,37 @@ import java.util.Collection;
 public class AddressController {
 
     @Autowired
-    private IAddressService iAddressService;
+    IAddressService iAddressService;
 
     @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addAddress(@RequestBody AddressDTO addressDTO) {
-        iAddressService.create(addressDTO);
-        return new ResponseEntity<>("Se creó el domicilio: " + addressDTO.getStreet() + " " + addressDTO.getNumber(), HttpStatus.OK);
+        AddressDTO addressCreated = iAddressService.create(addressDTO);
+        return new ResponseEntity<>(addressCreated, HttpStatus.OK);
     }
 
     @CrossOrigin(origins="*")
     @GetMapping("/{id}")
     public ResponseEntity<?> findAddress(@PathVariable Integer id) {
-        return ResponseEntity.ok(iAddressService.findOne(id));
+        AddressDTO addressDTO = iAddressService.findOne(id);
+        return new ResponseEntity<>(addressDTO, HttpStatus.OK);
     }
 
     @CrossOrigin(origins="*")
     @GetMapping()
-    public Collection<AddressDTO> findAllAddresses() {
-        return iAddressService.findAll();
+    public ResponseEntity<Collection<AddressDTO>> findAllAddresses() {
+        return ResponseEntity.ok(iAddressService.findAll());
     }
 
     @CrossOrigin(origins="*")
     @PutMapping()
     public ResponseEntity<?> updateAddress(@RequestBody AddressDTO addressDTO) {
-        ResponseEntity<String> res = null;
+        ResponseEntity<?> res;
         if (iAddressService.findOne(addressDTO.getId()) == null){
             res = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            iAddressService.update(addressDTO);
-            res = new ResponseEntity<>("Se modificó el domicilio con id: " + addressDTO.getId(), HttpStatus.OK);
+            AddressDTO addressUpdated = iAddressService.update(addressDTO);
+            res = new ResponseEntity<>(addressUpdated, HttpStatus.OK);
         }
         return res;
     }
@@ -51,9 +52,9 @@ public class AddressController {
     @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteAddress(@PathVariable Integer id) {
-        ResponseEntity<String> res = null;
+        ResponseEntity<String> res;
         if (iAddressService.findOne(id) == null){
-            res = new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+            res = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             iAddressService.delete(id);
             res = new ResponseEntity<>("Domicilio eliminado con id: " + id, HttpStatus.OK);

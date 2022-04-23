@@ -19,31 +19,32 @@ public class DentistShiftController {
     @CrossOrigin(origins="*")
     @PostMapping("/register")
     public ResponseEntity<?> addDentistShift(@RequestBody DentistShiftDTO dentistShiftDTO) {
-        iDentistShiftService.create(dentistShiftDTO);
-        return new ResponseEntity<>("Se creó el turno para el paciente con id : " + dentistShiftDTO.getPatient().getId(), HttpStatus.OK);
+        DentistShiftDTO dentistShiftCreated = iDentistShiftService.create(dentistShiftDTO);
+        return new ResponseEntity<>(dentistShiftCreated, HttpStatus.OK);
     }
 
     @CrossOrigin(origins="*")
     @GetMapping("/{id}")
     public ResponseEntity<?> findDentistShift(@PathVariable Integer id) {
-        return ResponseEntity.ok(iDentistShiftService.findOne(id));
+        DentistShiftDTO dentistShiftDTO = iDentistShiftService.findOne(id);
+        return new ResponseEntity<>(dentistShiftDTO, HttpStatus.OK);
     }
 
     @CrossOrigin(origins="*")
     @GetMapping()
-    public Collection<DentistShiftDTO> findAllDentistShifts() {
-        return iDentistShiftService.findAll();
+    public ResponseEntity<Collection<DentistShiftDTO>> findAllDentistShifts() {
+        return ResponseEntity.ok(iDentistShiftService.findAll());
     }
 
     @CrossOrigin(origins="*")
     @PutMapping()
     public ResponseEntity<?> updateDentistShift(@RequestBody DentistShiftDTO dentistShiftDTO) {
-        ResponseEntity<String> res = null;
+        ResponseEntity<?> res;
         if (iDentistShiftService.findOne(dentistShiftDTO.getId()) == null) {
             res = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
-            iDentistShiftService.update(dentistShiftDTO);
-            res = new ResponseEntity<>("Se modificó el turno con id: " + dentistShiftDTO.getId(), HttpStatus.OK);
+            DentistShiftDTO dentistShiftUpdated = iDentistShiftService.update(dentistShiftDTO);
+            res = new ResponseEntity<>(dentistShiftUpdated, HttpStatus.OK);
         }
         return res;
     }
@@ -51,9 +52,9 @@ public class DentistShiftController {
     @CrossOrigin(origins="*")
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteDentistShift(@PathVariable Integer id) {
-        ResponseEntity<String> res = null;
+        ResponseEntity<String> res;
         if (iDentistShiftService.findOne(id) == null) {
-            res = new ResponseEntity<String>(HttpStatus.NOT_FOUND);
+            res = new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } else {
             iDentistShiftService.delete(id);
             res = new ResponseEntity<>("Turno eliminado con id: " + id, HttpStatus.OK);
