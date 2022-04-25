@@ -5,3 +5,4 @@
 [2022-04-22 18:04:11] [ ERROR] [GlobalExceptionHandler:18] Request method 'POST' not supported
 [2022-04-22 18:10:55] [ ERROR] [GlobalExceptionHandler:18] Request method 'POST' not supported
 [2022-04-22 18:23:24] [ ERROR] [GlobalExceptionHandler:18] Request method 'POST' not supported
+[2022-04-23 19:07:43] [ ERROR] [GlobalExceptionHandler:17] query did not return a unique result: 3; nested exception is javax.persistence.NonUniqueResultException: query did not return a unique result: 3
